@@ -1,1 +1,0 @@
-Simple Calendar Application CLI for Silk OS.
