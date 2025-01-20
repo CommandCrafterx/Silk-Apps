@@ -2,20 +2,25 @@
 
 import os
 
+# Initialize an empty to-do list
 todoList = []
 
+# Function to create a new item in the to-do list
 def createItem(item):
     todoList.append(item)
     print(f"\"{item}\" has been added to the list.")
 
+# Function to delete an item from the to-do list
 def deleteItem():
     print('''What Item would you like to delete?
           1. Last Item
           2. Custom Item''')
     userInput = input("> ")
     if userInput == '1':
+        # Remove the last item in the list
         print(f"\"{todoList.pop()}\" has been removed from the list.")
     elif userInput == '2':
+        # Remove a custom item specified by the user
         print("What item would you like to delete?")
         item = input("> ")
         if item in todoList:
@@ -26,6 +31,7 @@ def deleteItem():
     else:
         print("Invalid input. Please try again.")
 
+# Function to view all items in the to-do list
 def viewList():
     if len(todoList) == 0:
         print("The list is empty.")
@@ -34,6 +40,7 @@ def viewList():
         for item in todoList:
             print(f"- {item}")
 
+# Function to save the to-do list to a file
 def saveToFile():
     print("What would you like to name the file? (Do not include .txt)")
     name = input("> ") + ".txt"
@@ -42,6 +49,7 @@ def saveToFile():
             file.write(f"{item}\n")
     print(f"The list has been saved to {name}")
 
+# Function to get valid input from the user
 def getValidInput():
     while True:
         print('''What do you want to do?
@@ -56,6 +64,7 @@ def getValidInput():
         else:
             print("Invalid input. Please try again.")
 
+# Main function to run the to-do list app
 def main():
     while True:
         userInput = getValidInput()
@@ -74,6 +83,7 @@ def main():
                 print("Goodbye!")
                 break
 
+# Welcome message and credits, also starts the app
 print()
 print("Welcome to the To-Do List App!")
 print("Credits: Silk OS Linux")
