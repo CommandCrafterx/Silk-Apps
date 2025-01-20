@@ -5,7 +5,7 @@ import os
 todoList = []
 
 def createItem(item):
-    todoList.append(input(item))
+    todoList.append(item)
     print(f"\"{item}\" has been added to the list.")
 
 def deleteItem():
@@ -16,7 +16,8 @@ def deleteItem():
     if userInput == '1':
         print(f"\"{todoList.pop()}\" has been removed from the list.")
     elif userInput == '2':
-        item = input("What item would you like to delete?")
+        print("What item would you like to delete?")
+        item = input("> ")
         if item in todoList:
             todoList.remove(item)
             print(f"\"{item}\" has been removed from the list.")
@@ -39,7 +40,7 @@ def saveToFile():
     with open(name, "w") as file:
         for item in todoList:
             file.write(f"{item}\n")
-    print(f"The list has been saved to {name}.txt.")
+    print(f"The list has been saved to {name}")
 
 def getValidInput():
     while True:
@@ -59,7 +60,8 @@ def main():
     while True:
         userInput = getValidInput()
         if userInput == '1':
-            createItem(input("What item would you like to add? > "))
+            print("What item would you like to add?")
+            createItem(input("> "))
         elif userInput == '2':
             deleteItem()
         elif userInput == '3':
@@ -67,5 +69,12 @@ def main():
         elif userInput == '4':
             saveToFile()
         else:
-            print("Goodbye!")
-            break
+            print("Do you want to quit? (y/n)")
+            if input("> ") == 'y':
+                print("Goodbye!")
+                break
+
+print()
+print("Welcome to the To-Do List App!")
+print("Credits: Silk OS Linux")
+main()
