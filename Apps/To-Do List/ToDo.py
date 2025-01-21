@@ -1,4 +1,4 @@
-# This is a simple to-do list app that allows the user to add, delete, view, and save items to a list. By Silk OS.
+# This is a simple to-do list app that allows the user to add, delete, view, and save items to a list. By Silk.
 
 import os
 
