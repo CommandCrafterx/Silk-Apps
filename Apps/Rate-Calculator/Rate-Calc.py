@@ -14,7 +14,11 @@ def calculate_average_rate(numbers_list):
 def get_valid_input():
     while True:
         try:
-            num = int(input("Enter a number: "))
+            user_input = input("Enter a number: ")
+            if user_input.lower() == 'exit':
+                print("Goodbye!")
+                break
+            num = int(user_input)
             numbers.append(num)
             print(f"Current list: {numbers}")
             print(f"Current average rate: {calculate_average_rate(numbers)}")
@@ -26,6 +30,7 @@ def get_valid_input():
 # Main function to run the rate calculator
 def main():
     print("Welcome to the Average Rate Calculator!")
+    print("Type 'exit' to quit.")
     get_valid_input()
 
 # Run the main function
