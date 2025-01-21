@@ -86,5 +86,5 @@ def main():
 # Welcome message and credits, also starts the app
 print()
 print("Welcome to the To-Do List App!")
-print("Credits: Silk OS Linux")
+print("Credits: Silk")
 main()
