@@ -1,0 +1,1 @@
+Simple Rate Calculator Program by Silk. This is a sample application.
