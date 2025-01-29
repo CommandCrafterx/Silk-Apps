@@ -1,9 +1,10 @@
-# This is a simple to-do list app that allows the user to add, delete, view, and save items to a list. By Silk.
+# This is a simple to-do list app that allows the user to add, delete, view, and save items to a list.
 
 import os
 
 # Initialize an empty to-do list
 todoList = []
+FILE_NAME = "to-do.txt"
 
 # Function to create a new item in the to-do list
 def createItem(item):
@@ -15,76 +16,73 @@ def deleteItem():
     print('''What Item would you like to delete?
           1. Last Item
           2. Custom Item''')
-    userInput = input("> ")
-    if userInput == '1':
-        # Remove the last item in the list
-        print(f"\"{todoList.pop()}\" has been removed from the list.")
-    elif userInput == '2':
-        # Remove a custom item specified by the user
-        print("What item would you like to delete?")
-        item = input("> ")
-        if item in todoList:
-            todoList.remove(item)
-            print(f"\"{item}\" has been removed from the list.")
-        else:
-            print(f"\"{item}\" is not in the list.")
-    else:
-        print("Invalid input. Please try again.")
+    userChoice = input("Enter your choice: ")
 
-# Function to view all items in the to-do list
+    if userChoice == "1":
+        if todoList:
+            removed = todoList.pop()
+            print(f"\"{removed}\" has been removed from the list.")
+        else:
+            print("The list is empty.")
+    elif userChoice == "2":
+        itemToRemove = input("Enter the exact item to delete: ")
+        if itemToRemove in todoList:
+            todoList.remove(itemToRemove)
+            print(f"\"{itemToRemove}\" has been removed from the list.")
+        else:
+            print("Item not found in the list.")
+    else:
+        print("Invalid choice.")
+
+# Function to view the current to-do list
 def viewList():
-    if len(todoList) == 0:
+    if not todoList:
         print("The list is empty.")
     else:
-        print("Here is the list:")
-        for item in todoList:
-            print(f"- {item}")
+        print("Your current to-do list:")
+        for i, item in enumerate(todoList, start=1):
+            print(f"{i}. {item}")
 
-# Function to save the to-do list to a file
-def saveToFile():
-    print("What would you like to name the file? (Do not include .txt)")
-    name = input("> ") + ".txt"
-    with open(name, "w") as file:
-        for item in todoList:
-            file.write(f"{item}\n")
-    print(f"The list has been saved to {name}")
+# Function to save the list to a file
+def saveList():
+    if os.path.exists(FILE_NAME):
+        overwrite = input(f"The file '{FILE_NAME}' already exists. Overwrite? (Y/N): ").strip().lower()
+        if overwrite != 'y':
+            print("File was not overwritten.")
+            return
+    
+    try:
+        with open(FILE_NAME, 'w', encoding='utf-8') as file:
+            file.writelines(f"{item}\n" for item in todoList)
+        print(f"List saved to '{FILE_NAME}'.")
+    except Exception as e:
+        print(f"An error occurred while saving the list: {e}")
 
-# Function to get valid input from the user
-def getValidInput():
-    while True:
-        print('''What do you want to do?
-              1. Add an item
-              2. Delete an item
-              3. View the list
-              4. Save to file
-              5. Quit''')
-        userInput = input("> ")
-        if userInput in ['1', '2', '3', '4', '5']:
-            return userInput
-        else:
-            print("Invalid input. Please try again.")
-
-# Main function to run the to-do list app
+# Main menu loop
 def main():
     while True:
-        userInput = getValidInput()
-        if userInput == '1':
-            print("What item would you like to add?")
-            createItem(input("> "))
-        elif userInput == '2':
-            deleteItem()
-        elif userInput == '3':
-            viewList()
-        elif userInput == '4':
-            saveToFile()
-        else:
-            print("Do you want to quit? (y/n)")
-            if input("> ") == 'y':
-                print("Goodbye!")
-                break
+        print('''\nTo-Do List Menu
+        1. Add Item
+        2. Delete Item
+        3. View List
+        4. Save List
+        5. Exit''')
+        choice = input("Enter your choice: ")
 
-# Welcome message and credits, also starts the app
-print()
-print("Welcome to the To-Do List App!")
-print("Credits: Silk")
-main()
+        if choice == "1":
+            item = input("Enter the item to add: ")
+            createItem(item)
+        elif choice == "2":
+            deleteItem()
+        elif choice == "3":
+            viewList()
+        elif choice == "4":
+            saveList()
+        elif choice == "5":
+            print("Exiting the program. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 5.")
+
+if __name__ == "__main__":
+    main()
