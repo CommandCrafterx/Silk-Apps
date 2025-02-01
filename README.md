@@ -5,4 +5,6 @@ Disclaimer! Everything in this Repo is not finished yet and can probably cause p
 
 # Install
 To install the Apps just clone this repository.
-For easier updating of the apps you can use our Silk-App-Updater
+
+# Updates
+For easier updating of the apps you can use our Silk-App-Updater.
